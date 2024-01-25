@@ -7,7 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import DetailPage from "./pages/DetailPage";
-import CreateDisscussPage from "./pages/CreateDiscussPage";
+import CreateThreadPage from "./pages/CreateThreadPage";
 import LeaderboardsPage from "./pages/Leaderboards";
 import { asyncPreloadProcess } from "./states/isPreload/action";
 import { asyncUnsetAuthUser } from "./states/authUser/action";
@@ -54,7 +54,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/detail/:id" element={<DetailPage />} />
             <Route path="/leaderboards" element={<LeaderboardsPage />} />
-            <Route path="/new" element={<CreateDisscussPage />} />
+            <Route path="/new" element={<CreateThreadPage />} />
           </Routes>
         </main>
       </div>

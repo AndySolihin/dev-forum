@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
 import { asyncCreateThread } from "../states/threads/action";
 
-export default function CreateDisscussPage() {
+export default function CreateThreadPage() {
   const [title, setTitle] = useInput("");
   const [body, setBody] = useState("");
   const [category, setCategory] = useInput("");
+  const [titleError, setTitleError] = useState(false);
+  const [categoryError, setCategoryError] = useState(false);
+  const [bodyError, setBodyError] = useState(false);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -16,11 +19,24 @@ export default function CreateDisscussPage() {
     setBody(e.target.innerHTML);
   };
 
-  function onSubmitNewThread(e) {
+  const onSubmitNewThread = (e) => {
     e.preventDefault();
-    dispatch(asyncCreateThread({ title, body, category }));
-    navigate("/");
-  }
+    if (title === "" && category === "" && body === "") {
+      setTitleError(true);
+      setCategoryError(true);
+      setBodyError(true);
+    } else if (category === "") {
+      setCategoryError(true);
+    } else if (title === "") {
+      setTitleError(true);
+      setCategoryError(true);
+    } else if (body === "") {
+      bodyError(true);
+    } else {
+      dispatch(asyncCreateThread({ title, body, category }));
+      navigate("/");
+    }
+  };
 
   const roleBody = "role-body";
 
@@ -29,25 +45,31 @@ export default function CreateDisscussPage() {
       <h1>Buat Diskusi Baru</h1>
       <form onSubmit={onSubmitNewThread}>
         <label htmlFor="title">
-          Judul
+          Judul*
           <input
             type="text"
             placeholder="Judul"
             value={title}
             onChange={setTitle}
           />
+          {titleError && (
+            <p className="error-msg-input">Judul tidak boleh kosong</p>
+          )}
         </label>
         <label htmlFor="category">
-          Kategori
+          Kategori*
           <input
             type="text"
             placeholder="Kategori diskusi"
             value={category}
             onChange={setCategory}
           />
+          {categoryError && (
+            <p className="error-msg-input">Kategori tidak boleh kosong</p>
+          )}
         </label>
         <div className="label">
-          <p>Diskusi</p>
+          <p>Diskusi*</p>
           <div
             role={roleBody}
             className="comment-field-input"
@@ -55,6 +77,7 @@ export default function CreateDisscussPage() {
             contentEditable
             suppressContentEditableWarning
           />
+          {bodyError && <p className="error-msg-input">Body harus diisi</p>}
         </div>
         <button type="submit" className="btn">
           Buat Diskusi

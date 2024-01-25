@@ -441,7 +441,7 @@ form > button {
   flex-direction: column;
 }
 
-.card-body{
+.card-body {
   display: flex;
   justify-content: center;
   align-content: flex-start;
@@ -457,8 +457,6 @@ form > button {
   gap: 8px;
   text-overflow: ellipsis;
 }
-
-
 
 .card-title {
   font-size: 24px;
@@ -478,7 +476,7 @@ form > button {
   margin-left: 4px;
 }
 
-.card-content{
+.card-content {
   display: inline-block;
   font-size: 14px;
   display: -webkit-box;
@@ -488,7 +486,8 @@ form > button {
   overflow: hidden;
 }
 
-.card-content, .card-content > *{
+.card-content,
+.card-content > * {
   color: var(--gray-color);
 }
 
@@ -647,6 +646,12 @@ form > button {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 24px;
+}
+
+.error-msg-input {
+  color: red;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 @media screen and (min-width: 1200px) {
